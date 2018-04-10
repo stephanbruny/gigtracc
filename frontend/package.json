@@ -1,0 +1,19 @@
+{
+  "name": "gigtrack-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o ../public/js/index.js"
+  },
+  "author": "Stephan Bruny",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "browserify": "^16.1.1",
+    "crel": "^3.1.0",
+    "moment": "^2.22.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  }
+}

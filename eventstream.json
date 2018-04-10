@@ -1,0 +1,402 @@
+﻿[
+  {
+    "streamVersion": 49,
+    "id": "a29fee95-a823-4517-a112-7c8445087aac",
+    "name": "entry",
+    "date": "2018-04-10T11:31:55.5511084+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"11a91d39-e493-4a56-b472-1ef07f606dae\",\r\n    \"date\": \"2018-04-04T09:31:44.0170000Z\",\r\n    \"duration\": 8,\r\n    \"description\": \"asdfg\",\r\n    \"location\": \"tre\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 48,
+    "id": "29806364-f2a2-4cd5-8b52-04268acb3401",
+    "name": "entry",
+    "date": "2018-04-10T11:31:43.9972109+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"c1ab447f-771f-443e-a1a3-e0238487b65f\",\r\n    \"date\": \"2018-04-05T09:30:35.5160000Z\",\r\n    \"duration\": 8,\r\n    \"description\": \"gggg\",\r\n    \"location\": \"Goo\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 47,
+    "id": "297f89f7-e9ca-4d9e-be31-b794f4b603dc",
+    "name": "entry",
+    "date": "2018-04-10T11:30:35.4888989+02:00",
+    "content": "{\r\n  \"Remove\": \"e76ab54c-508c-4f06-b861-3e3c80866000\"\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 46,
+    "id": "1707d009-5e53-4402-8075-7fbeb9e63c08",
+    "name": "entry",
+    "date": "2018-04-10T11:30:32.8298776+02:00",
+    "content": "{\r\n  \"Remove\": \"c1c1b0f4-1275-41c4-9660-3fea6fa2daa5\"\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 45,
+    "id": "c4be8d36-af7e-41aa-b712-7f3b286878bc",
+    "name": "entry",
+    "date": "2018-04-10T11:26:01.6159010+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"dae7c6a4-5de2-4b38-b89a-b3c1218972bb\",\r\n    7.25\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 44,
+    "id": "e2f32c30-c3c0-43ef-bee5-d883ccea9f94",
+    "name": "entry",
+    "date": "2018-04-10T11:21:43.1673248+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"35413368-4605-4087-a1f6-fd3a174efeef\",\r\n    \"date\": \"2018-03-15T10:21:33.3990000Z\",\r\n    \"duration\": 12,\r\n    \"description\": \"Jo\",\r\n    \"location\": \"Home\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 43,
+    "id": "9f68018d-c17b-42f9-a21b-75c8d836bcd6",
+    "name": "entry",
+    "date": "2018-04-10T11:02:41.4382378+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    9\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 42,
+    "id": "72f537fd-cfa5-4104-b0d2-1b8748dbfd70",
+    "name": "entry",
+    "date": "2018-04-10T11:02:31.6624934+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"e76ab54c-508c-4f06-b861-3e3c80866000\",\r\n    6\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 41,
+    "id": "24f71ad6-de5e-4051-a48d-be0e6bb86d02",
+    "name": "entry",
+    "date": "2018-04-10T11:02:24.2791452+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"84f44d4d-9827-4b42-a538-9806873d9bfb\",\r\n    7\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 40,
+    "id": "7ff51e0c-59c6-4485-b077-3134d1c822b0",
+    "name": "entry",
+    "date": "2018-04-10T11:02:07.9148896+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"06ae5fc6-4bb5-4f7d-9770-80b440beee31\",\r\n    \"date\": \"2018-04-06T09:01:25.8380000Z\",\r\n    \"duration\": 7.75,\r\n    \"description\": \"Something asdf\",\r\n    \"location\": \"Juhuuu\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 39,
+    "id": "2970324f-6986-48fc-9f19-fc5ac5e38abb",
+    "name": "entry",
+    "date": "2018-04-10T10:54:49.4439401+02:00",
+    "content": "{\r\n  \"Remove\": \"48172968-70b4-494d-9c0f-a0a658969f87\"\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 38,
+    "id": "dbdec298-83e3-4eac-bdb1-6693a63a2040",
+    "name": "entry",
+    "date": "2018-04-10T10:17:16.9134821+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"c1c1b0f4-1275-41c4-9660-3fea6fa2daa5\",\r\n    \"date\": \"2018-04-14T08:16:56.7100000Z\",\r\n    \"duration\": 8,\r\n    \"description\": \"öpalo\",\r\n    \"location\": \"lol\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 37,
+    "id": "ba6a5f01-a3e5-4e3e-a3f0-1050dd0df75c",
+    "name": "entry",
+    "date": "2018-04-10T10:07:16.9134137+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"e76ab54c-508c-4f06-b861-3e3c80866000\",\r\n    \"date\": \"2018-04-13T08:06:47.9740000Z\",\r\n    \"duration\": 6.5,\r\n    \"description\": \"qwertz\",\r\n    \"location\": \"ASDF\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 36,
+    "id": "0a4ce086-410a-4112-9e32-56e43e5c0567",
+    "name": "entry",
+    "date": "2018-04-10T10:06:47.9418975+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"0400e122-6b6d-4728-9c35-f8c71bb8870d\",\r\n    \"date\": \"2018-04-12T08:06:38.3030000Z\",\r\n    \"duration\": 5,\r\n    \"description\": \"asdf!\",\r\n    \"location\": \"Home\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 35,
+    "id": "19380922-0eb7-4451-8fc1-ac8c39a79046",
+    "name": "entry",
+    "date": "2018-04-10T10:00:35.9955501+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"fac9f570-4862-4d96-9cca-18c77c0c7cb0\",\r\n    \"date\": \"2018-04-07T08:00:29.1470000Z\",\r\n    \"duration\": 3,\r\n    \"description\": \"Bar\",\r\n    \"location\": \"Foo\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 34,
+    "id": "d8ad7051-79e3-42c7-934c-3d7d1c1b2c56",
+    "name": "entry",
+    "date": "2018-04-10T09:58:07.2839142+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"48172968-70b4-494d-9c0f-a0a658969f87\",\r\n    \"date\": \"2018-04-10T09:58:07.2819823+02:00\",\r\n    \"duration\": 5,\r\n    \"description\": \"Bar\",\r\n    \"location\": \"Foo\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 33,
+    "id": "fe5ebb51-1c17-4819-821b-379531374d05",
+    "name": "entry",
+    "date": "2018-04-09T18:55:29.4019124+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    9.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 32,
+    "id": "f5344730-d0a8-441a-a492-82bf7e976486",
+    "name": "entry",
+    "date": "2018-04-09T18:54:34.1153543+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"Some testing...!\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 31,
+    "id": "edcd6f6c-8840-4e6e-ae1d-fab8f18fe6d9",
+    "name": "entry",
+    "date": "2018-04-09T18:54:34.1091676+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    9.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 30,
+    "id": "e98abd9e-d87c-405f-8088-644597310d69",
+    "name": "entry",
+    "date": "2018-04-09T16:57:52.5830939+02:00",
+    "content": "{\r\n  \"ChangeLocation\": [\r\n    \"84f44d4d-9827-4b42-a538-9806873d9bfb\",\r\n    \"Localhost 1\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 29,
+    "id": "774701ff-cb66-46bb-a085-439ab481b932",
+    "name": "entry",
+    "date": "2018-04-09T16:37:29.2085191+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    9.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 28,
+    "id": "a9258b74-9318-4cd1-8719-5fbf37404690",
+    "name": "entry",
+    "date": "2018-04-09T15:31:42.3397040+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"84f44d4d-9827-4b42-a538-9806873d9bfb\",\r\n    \"Some designing, planning and architecture!\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 27,
+    "id": "1cdc58f6-7f9f-48b0-9bb2-6ba13e1ff325",
+    "name": "entry",
+    "date": "2018-04-09T15:31:42.3389998+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"84f44d4d-9827-4b42-a538-9806873d9bfb\",\r\n    7.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 26,
+    "id": "333677e6-29b6-4c0b-a307-5c28c3fe0cc1",
+    "name": "entry",
+    "date": "2018-04-09T14:47:27.7509644+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"dae7c6a4-5de2-4b38-b89a-b3c1218972bb\",\r\n    7.25\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 25,
+    "id": "ddbd39ff-f1fc-42e1-8b93-8cd0c1345f67",
+    "name": "entry",
+    "date": "2018-04-09T14:47:27.7386913+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"dae7c6a4-5de2-4b38-b89a-b3c1218972bb\",\r\n    \"Some thinking and dreaming\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 24,
+    "id": "602e7ab5-ec5c-4638-b7a4-26460e5dde18",
+    "name": "entry",
+    "date": "2018-04-09T14:45:40.2374990+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    8.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 23,
+    "id": "23bdb1d0-9221-470f-a15f-78dee07af3c8",
+    "name": "entry",
+    "date": "2018-04-09T14:43:34.5682053+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"Some testing...\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 22,
+    "id": "493835b8-6fd7-4cf5-b922-804551cf946b",
+    "name": "entry",
+    "date": "2018-04-09T14:43:34.5672898+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    7\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 21,
+    "id": "877b479f-39e9-4cb3-983d-dd0490d91cf7",
+    "name": "entry",
+    "date": "2018-04-09T14:43:09.5187141+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    7\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 20,
+    "id": "c30d641d-196e-4111-bba6-e7e7679562bc",
+    "name": "entry",
+    "date": "2018-04-09T14:43:02.9807781+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"Some testing and stuff...\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 19,
+    "id": "1cc39b2e-ac9b-4d27-a60d-543cf4499fcc",
+    "name": "entry",
+    "date": "2018-04-09T14:38:59.4794074+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    7.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 18,
+    "id": "59720fba-18d6-4332-a2c1-2406071000f1",
+    "name": "entry",
+    "date": "2018-04-09T14:38:16.2322726+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    6.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 17,
+    "id": "66b5df46-d555-4207-98e6-0f827638ecb1",
+    "name": "entry",
+    "date": "2018-04-09T14:37:51.5753584+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    7.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 16,
+    "id": "55f3d432-9636-498b-881d-3d66048fdb8c",
+    "name": "entry",
+    "date": "2018-04-09T14:36:22.2547990+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    6.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 15,
+    "id": "c5822d9f-28ef-4bd4-a4f3-a9dbaa10e318",
+    "name": "entry",
+    "date": "2018-04-09T14:36:04.7241991+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    7.5\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 14,
+    "id": "438a962a-013c-4e1c-bf65-6f51837c925d",
+    "name": "entry",
+    "date": "2018-04-09T14:34:08.1656536+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    75\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 13,
+    "id": "11f06bb7-80be-444a-b3df-9176dfa8046c",
+    "name": "entry",
+    "date": "2018-04-09T14:33:58.6756383+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    75\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 12,
+    "id": "fcff337a-7073-47ea-ad8c-15e6ca494cb4",
+    "name": "entry",
+    "date": "2018-04-09T14:33:50.6828850+02:00",
+    "content": "{\r\n  \"ChangeDuration\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    75\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 11,
+    "id": "db4b2e45-b6dd-48fe-a293-4c7026b58215",
+    "name": "entry",
+    "date": "2018-04-09T14:27:22.0258386+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"Some testing and stuff\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 10,
+    "id": "f1cc3cf7-973b-48b0-95ea-e666392fe644",
+    "name": "entry",
+    "date": "2018-04-09T14:25:33.8562621+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"Some testing!!! abcdsssss s\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 9,
+    "id": "511af619-53fc-4a08-8b78-1a1c8220fec7",
+    "name": "entry",
+    "date": "2018-04-09T10:09:56.0861245+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"84f44d4d-9827-4b42-a538-9806873d9bfb\",\r\n    \"Some designing, planning and architecture\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 8,
+    "id": "34593c8f-dc4d-4938-aa77-cce59a32fc96",
+    "name": "entry",
+    "date": "2018-04-09T10:07:06.1037130+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"4f49e9f7-9b23-465b-9396-340b7b3adbdb\",\r\n    \"Some hacking. And stuff...\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 7,
+    "id": "30241097-a4a9-426c-99b2-f138d5933c0b",
+    "name": "entry",
+    "date": "2018-04-09T09:59:31.3099767+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"4f49e9f7-9b23-465b-9396-340b7b3adbdb\",\r\n    \"Some hacking. And stuff\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 6,
+    "id": "aa8d8f2e-7901-4ef6-ae4e-22770ef1d9e3",
+    "name": "entry",
+    "date": "2018-04-09T09:58:54.7674816+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"Some testing!!!\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 5,
+    "id": "2467e607-a3db-4edf-9737-9b21ad4007e4",
+    "name": "entry",
+    "date": "2018-04-08T18:36:09.1982842+02:00",
+    "content": "{\r\n  \"ChangeLocation\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"At home\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 4,
+    "id": "1283dc51-067c-49ae-8649-37e79f5cae33",
+    "name": "entry",
+    "date": "2018-04-08T18:36:09.1975846+02:00",
+    "content": "{\r\n  \"ChangeDescription\": [\r\n    \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"Do some real testing\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 3,
+    "id": "41f71d7c-19e1-48dc-bbcb-b82dd35fd16d",
+    "name": "entry",
+    "date": "2018-04-08T18:36:09.1883650+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"84f44d4d-9827-4b42-a538-9806873d9bfb\",\r\n    \"date\": \"2018-04-11T18:36:09.1183132+02:00\",\r\n    \"duration\": 7.5,\r\n    \"description\": \"Some designing\",\r\n    \"location\": \"Localhost\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 2,
+    "id": "30ca0cce-c653-4fb6-889f-de146ddccc36",
+    "name": "entry",
+    "date": "2018-04-08T18:36:09.1882165+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"dae7c6a4-5de2-4b38-b89a-b3c1218972bb\",\r\n    \"date\": \"2018-04-10T18:36:09.1183126+02:00\",\r\n    \"duration\": 7,\r\n    \"description\": \"Some thinking\",\r\n    \"location\": \"Localhost\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 1,
+    "id": "8bc6e69e-a31b-4399-a894-51ed700818d4",
+    "name": "entry",
+    "date": "2018-04-08T18:36:09.1876788+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"4f49e9f7-9b23-465b-9396-340b7b3adbdb\",\r\n    \"date\": \"2018-04-09T18:36:09.1183085+02:00\",\r\n    \"duration\": 8,\r\n    \"description\": \"Some hacking\",\r\n    \"location\": \"Localhost\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 0,
+    "id": "1cffe653-2715-4b28-8b68-4d636ee1a86e",
+    "name": "entry",
+    "date": "2018-04-08T18:36:09.1802255+02:00",
+    "content": "{\r\n  \"Add\": {\r\n    \"id\": \"176f0922-e29e-468a-846b-c5a339792bfe\",\r\n    \"date\": \"2018-04-08T18:36:09.1163798+02:00\",\r\n    \"duration\": 8,\r\n    \"description\": \"Some testing\",\r\n    \"location\": \"Localhost\"\r\n  }\r\n}",
+    "meta": null
+  }
+]
