@@ -1,146 +1,96 @@
+require('moment/locale/de');
+const moment = require('moment');
+const el = require('crel');
+const Project = require('./view/project');
+const request = require('request-promise');
+const url = require('./model/url');
+const modal = require('./modal');
+const uiUtils = require('./ui-utils');
+const Nanocal = require('nanocal');
+const widgets = require('./widgets');
+const JSONEditor = require('jsoneditor');
+
+const projectEdit = require('./view/project-edit');
+
+const buildProjectPage = (parent) => (month) => {
+    const projectsDate = moment().month(month);
+    return request.get(url('api', 'projects', projectsDate.format('YYYY-MM')), { json: true })
+    .then(projects => Promise.all(projects.map(proj => Project(parent)(proj, month))))
+    .then(() => {
+        const projectTools = el('div', { class: 'project-tools' });
+        const addProjectButton = el('button', { class: 'btn white hover-shadow ' }, el('span', {class: 'fa fa-plus fa-2x'}));
+
+        addProjectButton.addEventListener('click', () => {
+            const container = el('div', { class: 'form' });
+            const projectModal = modal(container, 'New Project');
+            const prom = projectEdit(container);
+            projectModal.show();
+            prom
+            .then(data =>
+                request.post(url('api/project'), { json: true, body: data })
+            ).then(() => projectModal.close())
+        })
+
+        el(projectTools, addProjectButton);
+        el(page, projectTools);
+    });
+}
+
+const getHeaderTools = () => {
+    const headerTools = el('div', { class: 'tools' });
+
+    const eventSourceButton = el('button', { class: 'btn' }, el('span', { class: 'white fas fa-book fa-2x' }));
+    eventSourceButton.addEventListener('click', () => {
+        const container = el('div');
+        const editorModal = modal(container, 'Event Source');
+        const editor = new JSONEditor(container);
+        editorModal.show();
+        request.get(url('api/event-stream'))
+            .then(JSON.parse)
+            .then(data => data.map(item => Object.assign(item, { content: JSON.parse(item.content) })))
+            .then(data => {
+                return data.map(item => {
+                    if (item.content && item.content.Modified) {
+                        return Object.assign(item, { content: { Modified: JSON.parse(item.content.Modified[1]) } })
+                    }
+                    return item;
+                })
+            })
+            .then(data => editor.set(data))
+
+    })
+
+    el(headerTools, eventSourceButton);
+
+    return headerTools;
+}
+
 (function() {
-    const request = require('request-promise');
-    const modal = require('./modal');
-    const Entry = require('./entry');
-    require('moment/locale/de');
-    const moment = require('moment');
-    const el = require('crel');
-    const uiUtils = require('./ui-utils');
-
-    const test = el('p', { class: 'foo' }, 'Test');
-
     const page = el('div', { id: 'page' });
 
     const header = el('div', { id: 'header' });
-    const projectSummary =  el('div', { id: 'project-summary' }, el('h2', 'Project: Test | ' + moment().format('MMMM YYYY')));
-    
-    const calender = el('div', { id: 'calender' });
 
-    el(page, header, calender);
+    el(document.body, header, page);
 
-    const doc = el(document.body, page);
+    const buildPage = buildProjectPage(page);
 
-    moment.locale('de');
+    const showProjects = month => {
+        const prevMonthButton = el('button', { class:'btn white' }, el('span', { class: 'fa fa-chevron-left fa-2x' }));
+        const nextMonthButton = el('button', { class:'btn white' }, el('span', { class: 'fa fa-chevron-right fa-2x' }));
 
-    const loadEntries = month => cb => {
-
-        const prevMonthButton = el('button', { class: 'btn hover-shadow' }, el('i', { class: 'white fas fa-chevron-left fa-2x' }));
-        const nextMonthButton = el('button', { class: 'btn hover-shadow' }, el('i', { class: 'white fas fa-chevron-right fa-2x' }));
-
-        const currentMonth = moment().month(month);
-        const dayCount = currentMonth.daysInMonth();
         uiUtils.clear(header);
-        uiUtils.clear(calender);
-        uiUtils.clear(projectSummary);
-        el(projectSummary, el('h2', 'Project: Test | ' + moment().month(month).format('MMMM YYYY')));
-        const startDate = moment().month(month).format('YYYY-MM-01');
-        const endDate = moment().month(month).format('YYYY-MM-' + dayCount.toString());
 
-        prevMonthButton.addEventListener('click', () => loadEntries(month - 1)(renderCalender));
-        nextMonthButton.addEventListener('click', () => loadEntries(month + 1)(renderCalender));
-        el(header, prevMonthButton, projectSummary, totalHoursContainer, projectSettingsButton, nextMonthButton);
-
-        request.get(`http://localhost:8080/api/entries/${startDate}/${endDate}`)
-            .then(JSON.parse)
-            .then(cb(month, dayCount))
+        const headerTitle = el('h1', moment().month(month).format('MMMM YYYY'));
+        el(header, prevMonthButton, headerTitle, nextMonthButton);
+        uiUtils.clear(page);
+        return buildPage(month)
+            .then(() => new Promise((resolve) => {
+                prevMonthButton.addEventListener('click', () => resolve(showProjects(month - 1)));
+                nextMonthButton.addEventListener('click', () => resolve(showProjects(month + 1)));
+            }));
     }
 
-    const getTotalHours = entries => entries.reduce((acc, e) => acc + e.getData().duration, 0) || 0;
-
-    const totalHoursContainer = el('div', { class: 'total-hours' });
-    el(header, totalHoursContainer);
-
-    const projectButtons = el('div', { class: 'btn-list' });
-    const projectSettingsButton = el('button', { class: 'btn hover-shadow' }, el('i', { class: 'white fa fa-cog fa-2x' }));
-    el(projectButtons, projectSettingsButton);
+    showProjects(moment().month());
 
 
-
-    const renderTotalHours = total => {
-        uiUtils.clear(totalHoursContainer);
-        el(totalHoursContainer, el('h2', 'Total: ' + total.toString()));
-    }
-
-    const renderCalender = (currentMonth, dayCount) => (entries) => {
-        renderTotalHours(getTotalHours(entries.map(Entry)));
-        Array.from({length: dayCount - 1}, (v, i) => i).forEach((_, i) => {
-            const today = moment();
-            const itemDayOfMonth = i + 1;
-            const itemDate = moment().month(currentMonth).date(itemDayOfMonth);
-
-            const itemEntries = entries.filter(e => moment(itemDate).isSame(moment(e.date), 'day') ).map(Entry);
-            const hasEntries = !!itemEntries.length;
-
-            if (!hasEntries) itemEntries.push(Entry({}));
-
-            const d = el('p', moment(itemDate).format('dd DD'));
-            const dayCol = el('div', { class: 'day-of-month'}, d);
-            const totalHours = getTotalHours(itemEntries);
-            const totalHoursItem = el('div', { class: 'date-entry' }, totalHours.toString());
-            if (totalHours && totalHours > 0) dayCol.classList.add('work-done');
-            el(dayCol, totalHoursItem);
-            if (moment().month() === currentMonth && today.date() === itemDayOfMonth) {
-                dayCol.classList.add('today');
-            }
-            // itemEntries.forEach(e => el(dayCol, el('div', { class: 'date-entry' }, e.duration.toString())));
-            el(calender, dayCol);
-            dayCol.addEventListener('click', () => {
-                const modalHeader = el('span', moment(itemDate).format('dddd DD.MM.YYYY'));
-                const entryModal = modal(el('div'), modalHeader);
-                const currentEntries = itemEntries.map(entry => {
-                    const e = entry.getData();
-                    const container = el('div', { class: 'entry' });
-                    const containerHeader = el('div', { class: 'entry-header' });
-                    const durationInput = el('input', { type: 'number', value: e.duration }, e.duration );
-                    const locationInput = el('input', { type: 'text', value: e.location});
-                    el(
-                        containerHeader,
-                        el('label', 'Ort:', locationInput),
-                        el('label', 'Stunden:', durationInput)
-                    );
-                    el(container, containerHeader);
-                    const descriptionInput = el('textarea', e.description);
-                    el(container, el('label', 'Beschreibung:'), descriptionInput);
-                    const saveButton = el('button', { class: 'btn btn-bg btn-save' }, el('i', { class: 'fas fa-save fa-lg white' }));
-                    const removeButton = el('button', { class: 'btn btn-bg btn-red' }, el('i', { class: 'fas fa-trash fa-lg white' }));
-                    const entryButtons = el('div', { class: 'entry-buttons' });
-                    saveButton.addEventListener('click', () => {
-                        if (hasEntries) {
-                            return Promise.all([
-                                entry.modifyDescription(descriptionInput.value),
-                                entry.modifyDuration(durationInput.value),
-                                entry.modifyLocation(locationInput.value)
-                            ])
-                            .then(() => {
-                                entryModal.close();
-                                totalHoursItem.innerHTML = entry.getData().duration;
-                            });
-                        }
-                        return entry.create(itemDate, locationInput.value, parseFloat(durationInput.value), descriptionInput.value)
-                            .then(() => {
-                                uiUtils.clear(calender);
-                                loadEntries(currentMonth)(renderCalender);
-                                entryModal.close();
-                            });
-                    });
-                    removeButton.addEventListener('click', () => {
-                        entry.delete()
-                        .then(() => {
-                            uiUtils.clear(calender);
-                            loadEntries(currentMonth)(renderCalender);
-                            entryModal.close();
-                        })
-                    })
-                    el(entryButtons, removeButton, saveButton);
-                    el(container, entryButtons);
-                    return container;
-                });
-                entryModal.setContent(currentEntries);
-                entryModal.show();
-            });
-
-        });
-    }
-
-    loadEntries(moment().month())(renderCalender);
 })();

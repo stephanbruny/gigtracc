@@ -1,5 +1,6 @@
 namespace Gigtracc.Web
 
+open System
 open System.IO
 open Gigtracc.Messaging
 open Suave
@@ -16,11 +17,14 @@ module Server =
 
     let getHomeFolderPath path = Path.GetFullPath path
 
-    let start (config : WebserverConfig) queries commands creates deletes =
+    let serverKey = "foobar"
+
+    let start (config : WebserverConfig) checkAuth queries api =
         let conf =
             {
                 defaultConfig with
                     bindings = [ HttpBinding.createSimple HTTP config.host config.port ];
-                    homeFolder = config.homeFolder |> Option.map getHomeFolderPath
+                    homeFolder = config.homeFolder |> Option.map getHomeFolderPath;
+                    cookieSerialiser = new JsonNetCookieSerialiser()
             }
-        startWebServer conf (App.serve queries commands creates deletes)
+        startWebServer conf (App.serve checkAuth queries api)

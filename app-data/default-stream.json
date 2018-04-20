@@ -1,0 +1,98 @@
+﻿[
+  {
+    "streamVersion": 11,
+    "id": "a940b0e4-3351-4d1b-b8c7-a3bebaaf08b8",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-project",
+    "date": "2018-04-19T10:51:12.4009069+02:00",
+    "content": "{\r\n  \"Modified\": [\r\n    \"8b702995-e994-4526-b5db-ca6010b8d613\",\r\n    \"{\\r\\n  \\\"ModifyDescription\\\": [\\r\\n    \\\"8b702995-e994-4526-b5db-ca6010b8d613\\\",\\r\\n    \\\"Simples Zeiterfassungs-Tool für Freelancer auf Event Sourcing Basis\\\"\\r\\n  ]\\r\\n}\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 10,
+    "id": "331ff541-806c-480b-9076-5367444aaa63",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-project",
+    "date": "2018-04-19T10:49:15.0648072+02:00",
+    "content": "{\r\n  \"Modified\": [\r\n    \"8b702995-e994-4526-b5db-ca6010b8d613\",\r\n    \"{\\r\\n  \\\"ModifyEndDate\\\": [\\r\\n    \\\"8b702995-e994-4526-b5db-ca6010b8d613\\\",\\r\\n    \\\"2018-07-30T00:00:00.0000000\\\"\\r\\n  ]\\r\\n}\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 9,
+    "id": "e6a15181-97b2-478d-b0b7-2013904afb4a",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-entry",
+    "date": "2018-04-19T10:33:39.0133271+02:00",
+    "content": "{\r\n  \"Created\": {\r\n    \"id\": \"258303b3-f1af-4ccf-baf6-232064789f94\",\r\n    \"date\": \"2018-04-19T08:32:59.2590000Z\",\r\n    \"duration\": 7.5,\r\n    \"description\": \"Implementierung:\\nProjekt-Updates\",\r\n    \"location\": \"Zuhause\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 8,
+    "id": "cc7ebd50-0c61-4140-97e6-927b59332800",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-project",
+    "date": "2018-04-19T10:32:56.2060010+02:00",
+    "content": "{\r\n  \"Modified\": [\r\n    \"8b702995-e994-4526-b5db-ca6010b8d613\",\r\n    \"{\\r\\n  \\\"ModifyName\\\": [\\r\\n    \\\"8b702995-e994-4526-b5db-ca6010b8d613\\\",\\r\\n    \\\"Gigtracc 1.0\\\"\\r\\n  ]\\r\\n}\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 7,
+    "id": "cfdd2fd5-0ec4-4d08-b23c-71aee25863d7",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-entry",
+    "date": "2018-04-18T11:22:58.6329646+02:00",
+    "content": "{\r\n  \"Modified\": [\r\n    \"dfd255ec-ee7b-426d-acc3-738fc3a9ed77\",\r\n    \"{\\r\\n  \\\"ChangeDuration\\\": [\\r\\n    \\\"dfd255ec-ee7b-426d-acc3-738fc3a9ed77\\\",\\r\\n    8\\r\\n  ]\\r\\n}\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 6,
+    "id": "ad37932d-f97e-42a9-a3b2-68e9c79352ec",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-entry",
+    "date": "2018-04-18T11:22:58.6305286+02:00",
+    "content": "{\r\n  \"Modified\": [\r\n    \"dfd255ec-ee7b-426d-acc3-738fc3a9ed77\",\r\n    \"{\\r\\n  \\\"ChangeDescription\\\": [\\r\\n    \\\"dfd255ec-ee7b-426d-acc3-738fc3a9ed77\\\",\\r\\n    \\\"Implementierung:\\\\nBackend - Refactoring.\\\\nFrontend - Basis\\\"\\r\\n  ]\\r\\n}\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 5,
+    "id": "b2d7fa1e-edb2-4a60-b9a4-560cb4cee3cc",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-entry",
+    "date": "2018-04-18T11:19:52.3669185+02:00",
+    "content": "{\r\n  \"Created\": {\r\n    \"id\": \"3da5b756-4528-4358-aada-7e17a37daad7\",\r\n    \"date\": \"2018-04-16T09:14:05.0740000Z\",\r\n    \"duration\": 7.5,\r\n    \"description\": \"Implementierung:\\nBackend - Event Sourcing \",\r\n    \"location\": \"Zuhause\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 4,
+    "id": "ecf236e0-026d-4dd0-adee-36ef5c34c7e1",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-entry",
+    "date": "2018-04-18T11:13:57.1562203+02:00",
+    "content": "{\r\n  \"Created\": {\r\n    \"id\": \"dfd255ec-ee7b-426d-acc3-738fc3a9ed77\",\r\n    \"date\": \"2018-04-17T09:13:21.0940000Z\",\r\n    \"duration\": 8,\r\n    \"description\": \"Implementierung Backend - Refactoring.\\nFrontend - Basis\",\r\n    \"location\": \"Zuhause\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 3,
+    "id": "15391af1-419f-497f-8fd0-2cab1df45e77",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-entry",
+    "date": "2018-04-18T11:13:19.3691187+02:00",
+    "content": "{\r\n  \"Created\": {\r\n    \"id\": \"00369a8c-547f-45ab-8a92-b912e4f3cfd5\",\r\n    \"date\": \"2018-04-18T09:13:01.6630000Z\",\r\n    \"duration\": 7,\r\n    \"description\": \"Implementierung, Frontend\",\r\n    \"location\": \"Zuhause\"\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 2,
+    "id": "5bf39185-bc8f-4e7d-9b8e-c70eaead9b90",
+    "name": "users",
+    "date": "2018-04-18T11:10:56.1893610+02:00",
+    "content": "{\r\n  \"Modified\": [\r\n    \"default\",\r\n    \"{\\r\\n  \\\"AddProject\\\": \\\"8b702995-e994-4526-b5db-ca6010b8d613\\\"\\r\\n}\"\r\n  ]\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 1,
+    "id": "004fcfce-528c-449c-ba56-d620c3da6047",
+    "name": "8b702995-e994-4526-b5db-ca6010b8d613-project",
+    "date": "2018-04-18T11:10:56.1834894+02:00",
+    "content": "{\r\n  \"Created\": {\r\n    \"id\": \"8b702995-e994-4526-b5db-ca6010b8d613\",\r\n    \"name\": \"Gigtracc\",\r\n    \"description\": \"Simples Zeiterfassungs-Tool für Freelancer\",\r\n    \"client\": {\r\n      \"name\": \"Open Source\",\r\n      \"address\": \"Überall\"\r\n    },\r\n    \"startDate\": \"2018-04-01T00:00:00.0000000+02:00\",\r\n    \"endDate\": \"2018-05-30T00:00:00.0000000+02:00\",\r\n    \"entries\": [],\r\n    \"payment\": {\r\n      \"currency\": \"EUR\",\r\n      \"pricePerHour\": 62,\r\n      \"tax\": 19\r\n    }\r\n  }\r\n}",
+    "meta": null
+  },
+  {
+    "streamVersion": 0,
+    "id": "4320fff2-4fb7-4bd7-91f9-7162588c45c7",
+    "name": "users",
+    "date": "2018-04-16T17:21:34.3187314+02:00",
+    "content": "{\r\n  \"Created\": {\r\n    \"name\": \"default\",\r\n    \"email\": \"gigtracc@localhost\",\r\n    \"password\": \"e8wa4kZfjAk+o/m1qMmy7LX0CduT7hVquf9aoVNq2fE=\",\r\n    \"address\": \"\",\r\n    \"projects\": [],\r\n    \"permission\": {\r\n      \"All\": []\r\n    }\r\n  }\r\n}",
+    "meta": null
+  }
+]

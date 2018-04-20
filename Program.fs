@@ -1,5 +1,3 @@
-﻿// Learn more about F# at http://fsharp.org
-
 open System
 open System.Text
 open System.IO
@@ -12,154 +10,160 @@ open Gigtracc.Tracking.User
 open Gigtracc.Events.EventStream
 open Gigtracc.Web
 open Gigtracc.Web.App
+open Gigtracc.Utils
+open Gigtracc.Commands
+
+open Suave
+open Suave.Filters
+open Suave.Operators
 
 open FSharp.Json
 open Suave.Logging
+open System.Runtime.Serialization
+open Suave
+
+let maybeReadFile path =
+    if File.Exists path then
+        File.ReadAllText(path, Encoding.UTF8) |> Some
+    else
+        None
+
+let getEnvOrDefault key defaultValue =
+    Option.ofObj (Environment.GetEnvironmentVariable(key))
+    |> Option.defaultValue defaultValue
+
+let getDefaultUser (hash : Crypto.CryptoHash) : User =
+    createUser hash (
+        getEnvOrDefault "GIGTRACC_DEFAULT_USERNAME" "default",
+        getEnvOrDefault "GIGTRACC_DEFAULT_EMAIL" "gigtracc@localhost",
+        getEnvOrDefault "GIGTRACC_DEFAULT_PASSWORD" "admin",
+        "",
+        UserPermissions.All
+    )
 
 [<EntryPoint>]
 let main argv =
 
-    let eventStreamFileName = "eventstream.json"
+    let streamFileName =
+        Option.ofObj (Environment.GetEnvironmentVariable("GIGTRACC_STREAMFILE"))
+        |> Option.defaultValue "./app-data/default-stream.json"
 
-    let today = DateTime.Today
+    let stream =
+        maybeReadFile streamFileName
+        |> Option.map (createStreamFromJson "default")
+        |> Option.defaultValue (createEmptyStream "default")
 
-    let testProject =
-        {
-            id = System.Guid.NewGuid().ToString();
-            name = "Testproject";
-            client =
-                {
-                    name = "Testclient";
-                    address = "";
-                };
-            startDate = DateTime.Now;
-            endDate = (DateTime.Now.AddDays(1.0));
-            entries = [];
-            payment =
-                {
-                    currency = "EUR";
-                    pricePerHour = 70.0;
-                }
-        }
-
-    let testUser =
-        {
-            name = "Testuser";
-            address = "";
-            password = "test";
-            email = "test@test.de";
-            projects = [ testProject ];
-            permission = All
-        }
-
-    let entryEvents : StreamSource = { name = "Entries"; items = []; streamActor = new Actor<EventItem>() }
-
-    let testEntry = createEntry DateTime.Now (new TimeSpan(8, 0, 0)) "Some testing" "Localhost";
-
-    let addEntryEvent ev (data : EntryCommand) =
-        let entryData = Json.serialize data
-        addEventItem entryEvents ev None entryData
-
-    let eventFile =
-        if File.Exists eventStreamFileName then
-            File.ReadAllText eventStreamFileName |> Some
-        else
-            None
-
-    entryEvents.streamActor.AddAction(fun ev  ->
-        let data = Json.serialize entryEvents.items
-        File.WriteAllText(eventStreamFileName, data, Encoding.UTF8);
+    stream.streamActor.AddAction(fun _  ->
+        let data = Json.serialize stream.items
+        File.WriteAllText(streamFileName, data, Encoding.UTF8);
     )
 
-    match eventFile with
-    | Some data ->
-        entryEvents.items <- Json.deserialize<EventItem list> data
-    | None ->
+    let hashSalt = getEnvOrDefault "GIGTRACC_SALT" "salt me 1337"
+    let hash = new Crypto.CryptoHash(hashSalt, Convert.ToBase64String)
+
+    let defaultUser = getDefaultUser hash
+
+    let allUsers =
+        let userList = Command.initializeUserStream stream
+        if userList.IsEmpty then
+            Command.streamCreate<User> stream "users" defaultUser
+            Command.initializeUserStream stream
+        else
+            userList
+
+    let authorizeUser = new Authorizer<User> (fun (name, password) ->
+        allUsers
+        |> List.tryFind(fun user -> user.name = name)
+        |> Option.bind(fun user ->
+            if (hash.CreateSha256 password) = user.password then
+                Some user
+            else
+                None
+        )
+    )
+
+    let getUserProjects (user : User) =
+        Command.getUserData stream user.name
+        |> Option.map(fun user ->
+            user.projects |> List.map (Command.getProjectFromStream stream)
+        )
+
+    let userCommand commandFn (token : string) (json : string) =
+        authorizeUser.CheckToken token
+        |> Option.map (fun user -> commandFn user json)
+
+
+    let userRoutes (user : User) =
         [
-            EntryCommand.Add testEntry;
-            EntryCommand.Add (createEntry (DateTime.Now.AddDays(1.0)) (new TimeSpan(8, 0, 0)) "Some hacking" "Localhost");
-            EntryCommand.Add (createEntry (DateTime.Now.AddDays(2.0)) (new TimeSpan(7, 0, 0)) "Some thinking" "Localhost");
-            EntryCommand.Add (createEntry (DateTime.Now.AddDays(3.0)) (new TimeSpan(7, 30, 0)) "Some designing" "Localhost");
-        ] |> List.iter(addEntryEvent "entry")
+            pathScan "/api/entries/%s/%s/%s" (fun (projectId, startDateStr, endDateStr) ->
+                let streamId = projectId + "-entry"
+                let startDate = DateTime.Parse startDateStr
+                let endDate = DateTime.Parse endDateStr
+                let result =
+                    replay<Entry> stream "id" Command.modifyEntryFromJson streamId 0
+                    |> getEntriesBetween (startDate, endDate)
+                Successful.OK (result |> Json.serialize)
+            );
+            path "/api/projects" >=> context (fun ctx ->
+                let currentProjects = getUserProjects user |> Option.map (getCurrentProjects DateTime.Today) |> Option.defaultValue []
+                Successful.OK (currentProjects |> Json.serialize)
+            );
+            pathScan "/api/projects/%s" (fun dateStr -> context (fun ctx ->
+                let date = DateTime.Parse dateStr
+                let currentProjects = getUserProjects user |> Option.map (getCurrentProjects date) |> Option.defaultValue []
+                Successful.OK (currentProjects |> Json.serialize)
+            ));
+            path "/api/event-stream" >=> context(fun _ ->
+                let result = stream.items |> Json.serialize
+                Successful.OK result
+            )
+        ]
 
-        addEntryEvent "entry" (EntryCommand.ChangeDescription (testEntry.id, "Do some real testing"))
-        addEntryEvent "entry" (EntryCommand.ChangeLocation (testEntry.id, "At home"))
+    let projectCommands = new ProjectCommands(stream)
 
-    testProject.entries <- replayEntries 0 entryEvents
+    let queries =
+        [
+            Writers.setHeader "Content-Type" "application/json"
+            >=> context (fun ctx ->
+                App.getSessionValue ctx "token"
+                |> Option.bind(authorizeUser.CheckToken)
+                |> Option.bind(fun userData ->
+                    let usr = authorizeUser.CheckToken
+                    choose (userRoutes userData) |> Some
+                )
+                |> Option.defaultValue (RequestErrors.FORBIDDEN "Not authorized")
+            )
+        ]
 
-    printfn "SORTED: %A" (getAllEvents entryEvents "entry" 0)
+    let createCommands =
+        [
+            ("/api/project", userCommand projectCommands.createProjectCommand);
+            ("/api/project/entry", userCommand projectCommands.createProjectEntryCommand)
+        ]
 
-    printfn "E: %A" testProject.entries
-
-    let total = calculatePrice testProject today (DateTime.Now.AddDays(10.0))
-    printfn "Total: %.2f %s"  total testProject.payment.currency
-
-    let log =
-        testProject.entries
-        |> List.sortBy(fun data -> data.date)
-        |> List.map(fun data -> sprintf "%s: %s (%s)" (data.date.ToString()) data.description data.location)
-
-    printfn "Log: %s" (log |> String.concat "\n")
+    let updateCommands =
+        [
+            pathScan "/api/project/%s/entry/%s/duration" (fun (projectId, entryId) ->
+                App.requestAction ( projectCommands.modifyEntryDuration projectId entryId )
+            );
+            pathScan "/api/project/%s/entry/%s/location" (fun (projectId, entryId) ->
+                App.requestAction ( projectCommands.modifyEntryLocation projectId entryId )
+            );
+            pathScan "/api/project/%s/entry/%s/description" (fun (projectId, entryId) ->
+                App.requestAction ( projectCommands.modifyEntryDescription projectId entryId )
+            );
+            pathScan "/api/project/%s/name" (projectCommands.modifyProjectName >> App.requestAction);
+            pathScan "/api/project/%s/description" (projectCommands.modifyProjectDescription >> App.requestAction);
+            pathScan "/api/project/%s/clientName" (projectCommands.modifyProjectClientName >> App.requestAction);
+            pathScan "/api/project/%s/clientAddress" (projectCommands.modifyProjectClientAddress >> App.requestAction);
+            pathScan "/api/project/%s/pricePerHour" (projectCommands.modifyProjectPricePerHour >> App.requestAction);
+            pathScan "/api/project/%s/startDate" (projectCommands.modifyProjectStartDate >> App.requestAction);
+            pathScan "/api/project/%s/endDate" (projectCommands.modifyProjectEndDate >> App.requestAction);
+            pathScan "/api/project/%s/tax" (projectCommands.modifyProjectTax >> App.requestAction);
+        ]
 
     let serverJson = File.ReadAllText("server.json", Encoding.UTF8);
     let serverConf = Json.deserialize<Server.WebserverConfig>(serverJson)
+    Server.start serverConf authorizeUser queries ({ updateCommands = updateCommands; createCommands = createCommands; deleteCommands = [] })
 
-    let getEntries startDate endDate =
-        replayEntries 0 entryEvents
-        |> List.filter(fun e -> e.date >= startDate && e.date <= endDate)
-        |> Json.serialize
-
-    let modifyDescription (id : string) (data : string) =
-        let entry = testProject.entries |> List.tryFind(fun e -> e.id = (string id) )
-        entry |> Option.map(fun _ ->
-            addEntryEvent "entry" (EntryCommand.ChangeDescription ((string id), data))
-            testProject.entries <- replayEntries 0 entryEvents
-        ) |> ignore
-        "ok"
-
-    let modifyDuration (id : string) (data : string) =
-        let duration = Single.Parse(data, Globalization.CultureInfo.InvariantCulture)
-        let entry = testProject.entries |> List.tryFind(fun e -> e.id = (string id) )
-        entry |> Option.map(fun _ ->
-            addEntryEvent "entry" (EntryCommand.ChangeDuration ((string id), (float duration)))
-            testProject.entries <- replayEntries 0 entryEvents
-        ) |> ignore
-        "ok"
-
-    let modifyLocation (id : string) (data : string) =
-        let entry = testProject.entries |> List.tryFind(fun e -> e.id = (string id) )
-        entry |> Option.map(fun _ ->
-            addEntryEvent "entry" (EntryCommand.ChangeLocation ((string id), data))
-            testProject.entries <- replayEntries 0 entryEvents
-        ) |> ignore
-        "ok"
-
-    let createEntryCommand (data : string) =
-        let entryData = Json.deserialize<CreateEntryCommand> data
-        let entry = createFromCommand entryData
-        addEntryEvent "entry" (EntryCommand.Add entry)
-        "ok"
-
-    let deleteEntryCommand (id : string) (_ : string) =
-        addEntryEvent "entry" (EntryCommand.Remove id)
-        "ok"
-
-    let routes =
-        [
-            ("/api/entries/%s/description", modifyDescription);
-            ("/api/entries/%s/location", modifyLocation);
-            ("/api/entries/%s/duration", modifyDuration);
-        ]
-
-    let createRoutes =
-         [
-             ("/api/entries", createEntryCommand)
-         ]
-
-    let deleteRoutes =
-        [
-            ("/api/entries/%s", deleteEntryCommand)
-        ]
-
-    Server.start serverConf getEntries routes createRoutes deleteRoutes
-    0 // return an integer exit code
+    0

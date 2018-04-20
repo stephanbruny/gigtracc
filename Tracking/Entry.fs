@@ -15,15 +15,14 @@ module Entry =
         location : string;
     }
 
-    type EntryCommand =
-    | Add of Entry
+    type ModifyEntryCommand =
     | ChangeDescription of string * string
     | ChangeDuration of string * float
     | ChangeLocation of string * string
-    | Remove of string
 
     type CreateEntryCommand =
         {
+            projectId : string;
             location : string;
             description : string;
             duration : float;
@@ -52,44 +51,15 @@ module Entry =
     let modifyEntryDuration (entry : Entry) (duration : float) = { entry with duration = duration }
     let modifyEntryLocation (entry : Entry) location = { entry with location = location }
 
-    // TODO: supply serialization function externally
-    let replayEntries version entryEvents =
-        let events = getAllEvents entryEvents "entry" version |> List.map(fun ev -> Json.deserialize<EntryCommand> ev.content)
-        let created =
-            events
-            |> List.filter(fun ev -> match ev with | EntryCommand.Add _ -> true | _ -> false)
-            |> List.map(fun e -> match e with | EntryCommand.Add data -> Some data | _ -> None)
-            |> List.choose id
+    let modifyEntry (entry : Entry) up =
+        match up with
+        | ModifyEntryCommand.ChangeDescription (id, text) when id = entry.id ->
+            modifyEntryDescription entry text
+        | ModifyEntryCommand.ChangeDuration (id, dur) when id = entry.id ->
+            modifyEntryDuration entry dur
+        | ModifyEntryCommand.ChangeLocation (id, loc) when id = entry.id ->
+            modifyEntryLocation entry loc
+        | _ -> entry
 
-        let updates =
-            events
-            |> List.filter (fun ev ->
-                match ev with
-                | EntryCommand.ChangeDescription  _
-                | EntryCommand.ChangeDuration  _
-                | EntryCommand.Remove _
-                | EntryCommand.ChangeLocation _ -> true
-                | _ -> false)
-
-        created
-        |> List.filter(fun e ->
-            let removed =
-                updates |> List.tryFind(fun up -> match up with EntryCommand.Remove id when id = e.id -> true | _ -> false)
-            match removed with
-            | Some _ -> false
-            | _ -> true
-        )
-        |> List.map(fun e ->
-            let mutable result = e
-            updates |> List.iter(fun up ->
-                match up with
-                | EntryCommand.ChangeDescription (id, text) when id = e.id ->
-                    result <- modifyEntryDescription result text
-                | EntryCommand.ChangeDuration (id, dur) when id = e.id ->
-                    result <- modifyEntryDuration result dur
-                | EntryCommand.ChangeLocation (id, loc) when id = e.id ->
-                    result <- modifyEntryLocation result loc
-                | _ -> ()
-            )
-            result
-        )
+    let getEntriesBetween (startDate, endDate) (entries : Entry list) =
+        entries |> List.filter(fun e -> e.date >= startDate && e.date <= endDate)

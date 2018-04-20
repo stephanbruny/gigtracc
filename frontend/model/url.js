@@ -1,0 +1,1 @@
+module.exports = (...parts) => [window.location.origin].concat(parts).join('/');

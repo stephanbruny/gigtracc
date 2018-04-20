@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/nanocal/dist/nanocal.min.css">
-    <link rel="stylesheet" href="/css/jsoneditor.min.css">
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script> -->
     <link href="/css/fontawesome-all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css" />
-    <title>Gigtracc</title>
+    <title>Gigtracc | Login</title>
 </head>
 
 <body>
 </body>
 
-<script type="text/javascript" src="/js/index.js"></script>
+    <div id="login">
+        <form action="/login" method="POST">
+            <input id="name" name="name" />
+            <input id="password" name="password" type="password" />
+            <button type="submit" class="btn btn-bg white"><span class="fa fa-key">&nbsp;</span>Login</button>
+        </form>
+    </div>
 
 </html>

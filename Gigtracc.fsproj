@@ -7,13 +7,18 @@
 
   <ItemGroup>
     <Compile Include="Utils/Either.fs" />
+    <Compile Include="Utils/Crypto.fs" />
     <Compile Include="Messaging/Actor.fs" />
     <Compile Include="Events/EventStream.fs" />
     <Compile Include="Tracking/Entry.fs" />
     <Compile Include="Tracking/Project.fs" />
-    <Compile Include="User.fs" />
+    <Compile Include="Tracking/User.fs" />
+    <Compile Include="Web/Cookie.fs" />
+    <Compile Include="Web/Authorization.fs" />
     <Compile Include="Web/App.fs" />
     <Compile Include="Web/Server.fs" />
+    <Compile Include="Commands/Command.fs" />
+    <Compile Include="Commands/Project.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

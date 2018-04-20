@@ -66,6 +66,14 @@ body {
     flex-direction: column;
 }
 
+.overlay .modal.modal-borderless {
+    min-width: 0;
+}
+
+.overlay .modal.modal-borderless .modal-header {
+    display: none;
+}
+
 .modal .modal-header {
     background: #0b9;
     min-height: 1em;
@@ -125,6 +133,10 @@ body {
     background: rgba(255, 255, 255, 0.2);
     position: relative;
     cursor: pointer;
+}
+
+.day-of-month.weekend {
+    opacity: 0.5;
 }
 
 .day-of-month.work-done {
@@ -197,7 +209,7 @@ body {
     text-shadow: 0px 1px 0px #fff;
 }
 
-.entry textarea, .entry input {
+textarea, input {
     display: flex;
     flex-direction: row;
     background: #fafafa;
@@ -228,4 +240,106 @@ body {
 
 .btn-red {
     background: #e69;
+}
+
+#login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#login form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#login form input {
+    display: flex;
+    flex-direction: row;
+    background: #fafafa;
+    padding: 4pt;
+    border-radius: 4pt;
+    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, .25);
+    justify-content: space-between;
+    margin-bottom: .5em;
+    border: none;
+    color: rgba(0, 0, 0, .4);
+    font-family: 'Work Sans', sans-serif;
+}
+
+.project {
+    margin-bottom: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #0b9;
+    padding: .5em;
+    border-radius: 4pt;
+}
+
+.project-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 9pt;
+    color: #0b9;
+    align-items: center;
+}
+
+.project-tools {
+    background: #0b9;
+    border-radius: 4pt;
+    padding: 1em;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.project-header .btn-list {
+    background: #0b9;
+    border-radius: 16pt;
+    color: #fff;
+    padding: 0.5em 1em;
+}
+
+.project-header .btn-list button {
+    color: #fff;
+}
+
+table.project-report {
+    font-family: 'Source Code Pro', monospace;
+    border-radius: 4pt;
+    border: 1px solid #aaa;
+    text-align: left;
+}
+
+table.project-report tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table.project-report th, 
+table.project-report td {
+    padding: .25em;
+    white-space:pre;
+}
+
+td.num {
+    text-align: right;
 }

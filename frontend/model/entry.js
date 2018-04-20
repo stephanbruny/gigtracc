@@ -1,12 +1,13 @@
 const request = require('request-promise');
+const url = require('./url');
 
-module.exports = function(entryData) {
+module.exports = project => entryData => {
 
     let currentData = Object.assign({}, entryData);
 
     const modify = field => data => {
         if (data === currentData[field]) return Promise.resolve(currentData);
-        return request.put(`http://localhost:8080/api/entries/${entryData.id}/${field}`, {
+        return request.put(url('api', 'project', project.id, 'entry', entryData.id, field), {
             body: data
         })
         .then(() => {
@@ -21,11 +22,11 @@ module.exports = function(entryData) {
         modifyDuration: modify('duration'),
         modifyLocation: modify('location'),
         create: (date, location, duration, description) => {
-            return request.post('http://localhost:8080/api/entries', {
-                body: JSON.stringify({ date, location, duration, description })
+            return request.post(url('api', 'project','entry'), {
+                body: JSON.stringify({ projectId: project.id, date, location, duration, description })
             })
         },
-        delete: () => request.delete('http://localhost:8080/api/entries/' + entryData.id)
+        delete: () => request.delete(url('api', 'entries', entryData.id))
     }
 
 }
